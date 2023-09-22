@@ -33,6 +33,10 @@ class Inventory extends Model
     {
         return $this->hasMany(Sales::class,'barcode_no', 'barcode');
     }
+    public function images(): HasMany
+    {
+        return $this->hasMany(InventoryImages::class,'inventory_id', 'id');
+    }
 
 
 }
