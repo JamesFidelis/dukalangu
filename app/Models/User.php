@@ -6,7 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -19,9 +20,25 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'phone_number',
+        'tin_number',
+        'shop_id',
+        'cashier_code',
+        'isAdmin',
     ];
+
+    public function shops(): HasMany
+    {
+        return $this->hasMany(Shops::class,'owner_id', 'id');
+    }
+
+    public function inchargeShop(): HasMany
+    {
+        return $this->hasMany(Shops::class, 'incharge_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +59,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
