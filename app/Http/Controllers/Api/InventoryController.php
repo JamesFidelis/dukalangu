@@ -69,6 +69,14 @@ class InventoryController extends Controller
 
     }
 
+    public function getInventory(){
+        $inventory = Inventory::all();
+
+        return response([
+            'inventory'=>$inventory
+        ], 200);
+    }
+
 
 
 }

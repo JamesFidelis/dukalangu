@@ -11,7 +11,7 @@ class Stock extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'barcode',
+        'barcode_no',
         'product_name',
         'owner_id',
         'category_id',
@@ -20,7 +20,7 @@ class Stock extends Model
 
     public function inventory(): BelongsTo
     {
-        return $this->belongsTo(Inventory::class,'barcode', 'barcode_no');
+        return $this->belongsTo(Inventory::class,'barcode_no', 'barcode');
     }
 
     public function category(): HasMany

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CustomersController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ShopController;
+use App\Http\Controllers\Api\StockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,12 +30,22 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/shops',[ShopController::class,'getShops']);
     Route::post('/shops',[ShopController::class,'addShop']);
     Route::put('/shops',[ShopController::class,'assignIncharge']);
+    Route::post('/stock',[StockController::class,'addStock']);
+    Route::get('/stock',[StockController::class,'getStock']);
     Route::post('/inventory',[InventoryController::class,'addInventory']);
+    Route::get('/inventory',[InventoryController::class,'getInventory']);
     Route::post('/category',[CategoriesController::class,'addCategory']);
+    Route::get('/category',[CategoriesController::class,'getCategories']);
     Route::post('/staff',[ShopController::class,'addStaff']);
     Route::get('/staff',[ShopController::class,'getStaff']);
     Route::post('/customers',[CustomersController::class,'addCustomer']);
     Route::get('/customers',[CustomersController::class,'getCustomers']);
+    Route::delete('/customers',[CustomersController::class,'deleteCustomer']);
     Route::post('/logout',[AuthController::class,'logout']);
 
 });
+
+
+
+
+

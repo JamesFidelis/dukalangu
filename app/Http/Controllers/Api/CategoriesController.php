@@ -43,5 +43,13 @@ class CategoriesController extends Controller
 
     }
 
+    public function getCategories(){
+        $categories = Category::all();
+        return response([
+            'categories'=>$categories
+        ], 200);
+
+    }
+
 
 }

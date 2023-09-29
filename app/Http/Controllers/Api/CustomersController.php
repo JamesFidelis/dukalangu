@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller
 {
@@ -61,6 +62,31 @@ class CustomersController extends Controller
                 'message' => 'Could Not load Customers'
             ], 401);
         }
+
+    }
+
+
+    public function deleteCustomer(Request $request){
+
+        $validateData=$request->validate([
+            'customer_id'=>'required'
+        ]);
+
+        $customer = DB::table('customers')->where('id',$request->customer_id)->delete();
+
+        if($customer){
+            return response([
+                'notification' => 'success',
+                'message' => 'Customers Deleted'
+            ], 200);
+        }else{
+            return response([
+                'notification' => 'failure',
+                'message' => 'Could Not Delete Customer'
+            ], 401);
+        }
+
+
 
     }
 
