@@ -149,7 +149,6 @@ class ShopController extends Controller
 
     }
 
-
     public function getShops(){
         $userid=Auth::user()->id;
 

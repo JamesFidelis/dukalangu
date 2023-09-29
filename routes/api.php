@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CustomersController;
+use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/shops',[ShopController::class,'getShops']);
     Route::post('/shops',[ShopController::class,'addShop']);
     Route::put('/shops',[ShopController::class,'assignIncharge']);
+    Route::post('/inventory',[InventoryController::class,'addInventory']);
+    Route::post('/category',[CategoriesController::class,'addCategory']);
     Route::post('/staff',[ShopController::class,'addStaff']);
     Route::get('/staff',[ShopController::class,'getStaff']);
     Route::post('/customers',[CustomersController::class,'addCustomer']);
