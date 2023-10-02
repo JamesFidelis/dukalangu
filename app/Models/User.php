@@ -28,6 +28,7 @@ class User extends Authenticatable
         'shop_id',
         'cashier_code',
         'isAdmin',
+        'belongsTo',
     ];
 
     public function shops(): HasMany

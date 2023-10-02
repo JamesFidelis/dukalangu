@@ -72,6 +72,7 @@ class ShopController extends Controller
             'phone_number'=>$request->phone_number,
             'isAdmin'=>0,
             'shop_id'=>$request->shop_id,
+            'belongsTo'=>Auth::user()->id,
             'created_at'=>Carbon::now()
         ]);
 
@@ -85,6 +86,7 @@ class ShopController extends Controller
                     'email'=>$user->email,
                     'phone_number'=>$user->phone_number,
                     'shop_id'=>$user->shop_id,
+                    'belongsTo'=>$user->belongsTo,
                 ]
             ], 200);
         }else{
@@ -96,9 +98,9 @@ class ShopController extends Controller
 
     }
 
-    public function getStaff(Request $request){
+    public function getStaff(){
 
-        $staff= User::select('id','name','email','username','shop_id','created_at')->where('shop_id',$request->shop_id)->get();
+        $staff= User::select('id','name','email','username','shop_id','phone_number','isAdmin','cashier_code','created_at','belongsTo')->where('belongsTo',Auth::user()->id)->get();
 
         if($staff){
             return response([
