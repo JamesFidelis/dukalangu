@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -48,6 +49,32 @@ class CategoriesController extends Controller
         return response([
             'categories'=>$categories
         ], 200);
+
+    }
+
+
+
+    public function deleteCategory(Request $request){
+
+        $validateData=$request->validate([
+            'category_id'=>'required'
+        ]);
+
+        $customer = Category::where('id',$request->category_id)->delete();
+
+        if($customer){
+            return response([
+                'notification' => 'success',
+                'message' => 'Category Deleted'
+            ], 200);
+        }else{
+            return response([
+                'notification' => 'failure',
+                'message' => 'Could Not Delete Category'
+            ], 401);
+        }
+
+
 
     }
 

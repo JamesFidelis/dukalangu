@@ -30,19 +30,20 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/shops',[ShopController::class,'getShops']);
     Route::post('/shops',[ShopController::class,'addShop']);
     Route::put('/shops',[ShopController::class,'assignIncharge']);
+    Route::delete('/shops',[ShopController::class,'deleteShop']);
     Route::post('/stock',[StockController::class,'addStock']);
     Route::get('/stock',[StockController::class,'getStock']);
     Route::post('/inventory',[InventoryController::class,'addInventory']);
     Route::get('/inventory',[InventoryController::class,'getInventory']);
     Route::post('/category',[CategoriesController::class,'addCategory']);
     Route::get('/category',[CategoriesController::class,'getCategories']);
+    Route::delete('/category',[CategoriesController::class,'deleteCategory']);
     Route::post('/staff',[ShopController::class,'addStaff']);
     Route::get('/staff',[ShopController::class,'getStaff']);
+    Route::delete('/staff',[ShopController::class,'deleteStaff']);
     Route::post('/customers',[CustomersController::class,'addCustomer']);
     Route::get('/customers',[CustomersController::class,'getCustomers']);
     Route::delete('/customers',[CustomersController::class,'deleteCustomer']);
-    Route::post('/logout',[AuthController::class,'logout']);
-
 });
 
 

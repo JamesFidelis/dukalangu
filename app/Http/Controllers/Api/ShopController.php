@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ShopController extends Controller
@@ -164,6 +165,57 @@ class ShopController extends Controller
                 'message' => 'Could Not load Customers'
             ], 401);
         }
+
+    }
+
+
+
+    public function deleteShop(Request $request){
+
+        $validateData=$request->validate([
+            'shop_id'=>'required'
+        ]);
+
+        $customer = DB::table('shops')->where('id',$request->shop_id)->delete();
+
+        if($customer){
+            return response([
+                'notification' => 'success',
+                'message' => 'Shop Deleted'
+            ], 200);
+        }else{
+            return response([
+                'notification' => 'failure',
+                'message' => 'Could Not Delete Shop'
+            ], 401);
+        }
+
+
+
+    }
+
+
+    public function deleteStaff(Request $request){
+
+        $validateData=$request->validate([
+            'staff_id'=>'required'
+        ]);
+
+        $customer = User::where('id',$request->staff_id)->delete();
+
+        if($customer){
+            return response([
+                'notification' => 'success',
+                'message' => 'Staff Deleted'
+            ], 200);
+        }else{
+            return response([
+                'notification' => 'failure',
+                'message' => 'Could Not Delete Staff'
+            ], 401);
+        }
+
+
 
     }
 

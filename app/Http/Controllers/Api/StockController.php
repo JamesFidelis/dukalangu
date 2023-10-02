@@ -15,7 +15,7 @@ class StockController extends Controller
 
         $validateData = $request->validate([
             'barcode_no'=>'required',
-            'product_name'=>'required',
+            'product_name'=>'required|unique:stocks,product_name',
             'category_id'=>'required',
         ]);
 
@@ -31,7 +31,7 @@ class StockController extends Controller
             return response([
                 'notification' => 'Success',
                 'message' => 'Stock Created Successfully',
-                'inventory'=>$stock
+                'stock'=>$stock
             ], 200);
 
         }else{
@@ -54,6 +54,10 @@ class StockController extends Controller
 
 
     }
+
+
+
+
 
 
 

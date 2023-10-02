@@ -11,7 +11,7 @@ class Inventory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'barcode_no',
+        'barcode',
         'buy_price',
         'price_retail',
         'price_bulk',
