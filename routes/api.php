@@ -35,6 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/stock',[StockController::class,'getStock']);
     Route::post('/inventory',[InventoryController::class,'addInventory']);
     Route::get('/inventory',[InventoryController::class,'getInventory']);
+    Route::get('/inventory/images',[InventoryController::class,'getInventoryimages']);
     Route::post('/category',[CategoriesController::class,'addCategory']);
     Route::get('/category',[CategoriesController::class,'getCategories']);
     Route::delete('/category',[CategoriesController::class,'deleteCategory']);

@@ -85,5 +85,17 @@ class InventoryController extends Controller
     }
 
 
+    public function getInventoryimages(){
+
+        $images = InventoryImages::all()->groupBy('inventory_id');
+
+        return response([
+            'images'=>$images
+        ], 200);
+
+
+    }
+
+
 
 }
