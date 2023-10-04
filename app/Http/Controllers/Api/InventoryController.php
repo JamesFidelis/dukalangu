@@ -37,23 +37,30 @@ class InventoryController extends Controller
 
 
         if($inventory){
-            foreach ($request->file('images') as $file){
-                $filename=$file->getClientOriginalName();
+            if($request->hasFile('images')){
+                $images = $request->file('images');
+                foreach ($images as $image){
+                    $filename=$image->getClientOriginalName();
 
-                $path=$file->storeAs('InventoryImages',$filename,'public');
-                InventoryImages::create([
-                    'automobile_id'=>$inventory->id,
-                    'path'=>$path
-                ]);
+                    $path=$image->storeAs('InventoryImages',$filename,'public');
+                    InventoryImages::create([
+                        'inventory_id'=>$inventory->id,
+                        'image_path'=>'storage/'.$path
+                    ]);
 
+                }
+                return response([
+                    'notification' => 'Success',
+                    'message' => 'Inventory Created Successfully',
+                    'inventory'=>$inventory
+                ], 200);
+            }else{
+                return response([
+                    'notification' => 'Success',
+                    'message' => 'Inventory Created Successfully',
+                    'inventory'=>$inventory
+                ], 200);
             }
-
-            return response([
-                'notification' => 'Success',
-                'message' => 'Inventory Created Successfully',
-                'inventory'=>$inventory
-            ], 200);
-
         }else{
             return response([
                 'notification' => 'failure',
