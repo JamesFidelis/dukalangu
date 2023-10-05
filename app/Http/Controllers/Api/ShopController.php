@@ -155,7 +155,7 @@ class ShopController extends Controller
     public function getShops(){
         $userid=Auth::user()->id;
 
-        $shops =Shops::where('owner_id',$userid)->get();
+        $shops =Shops::with(['inventory','customer','sales','bills'])->where('owner_id',$userid)->get();
 
         if($shops){
             return response([

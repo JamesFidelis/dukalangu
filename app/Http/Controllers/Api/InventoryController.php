@@ -77,7 +77,7 @@ class InventoryController extends Controller
     }
 
     public function getInventory(){
-        $inventory = Inventory::all();
+        $inventory = Inventory::with(['images','sales','stock'])->get();
 
         return response([
             'inventory'=>$inventory

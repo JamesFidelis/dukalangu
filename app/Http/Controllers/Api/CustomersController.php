@@ -51,7 +51,7 @@ class CustomersController extends Controller
     public function getCustomers(){
         $userid=Auth::user()->id;
 
-        $customer =Customer::all();
+        $customer =Customer::with('bills')->get();
 
         if($customer){
             return response([

@@ -46,7 +46,7 @@ class StockController extends Controller
 
 
     public function getStock(){
-        $stock = Stock::all();
+        $stock = Stock::with('category')->get();
 
         return response([
             'stock'=>$stock

@@ -35,10 +35,10 @@ class Shops extends Model
         return $this->hasMany(Inventory::class,'shop_id', 'id');
     }
 
-    public function categories(): HasMany
-    {
-        return $this->hasMany(Category::class,'category_id', 'id');
-    }
+//    public function categories(): HasMany
+//    {
+//        return $this->hasMany(Category::class,'category_id', 'id');
+//    }
 
     public function bills(): HasMany
     {
