@@ -40,7 +40,7 @@ class InventoryController extends Controller
             if($request->hasFile('images')){
                 $images = $request->file('images');
                 foreach ($images as $image){
-                    $filename=$image->getClientOriginalName();
+                    $filename=time().$image->getClientOriginalName();
                     $path=$image->storeAs('InventoryImages',$filename,'public');
                     InventoryImages::create([
                         'inventory_id'=>$inventory->id,
