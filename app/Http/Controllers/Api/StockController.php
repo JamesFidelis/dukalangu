@@ -46,7 +46,7 @@ class StockController extends Controller
 
 
     public function getStock(){
-        $stock = Stock::with('category')->get();
+        $stock = Stock::with('category')->where('owner_id',Auth::user()->id||Auth::user()->belongsTo)->get();
 
         return response([
             'stock'=>$stock
