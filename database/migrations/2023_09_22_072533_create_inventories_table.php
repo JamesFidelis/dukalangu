@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('barcode');
+            $table->string('product_name')->unique();
             $table->string('buy_price');
             $table->string('price_retail');
             $table->string('price_bulk');
             $table->string('quantity');
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->timestamps();

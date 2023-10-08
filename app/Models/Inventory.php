@@ -17,6 +17,9 @@ class Inventory extends Model
         'price_bulk',
         'quantity',
         'shop_id',
+        'product_name',
+        'owner_id',
+        'category_id',
     ];
 
 
@@ -36,6 +39,10 @@ class Inventory extends Model
     public function images(): HasMany
     {
         return $this->hasMany(InventoryImages::class,'inventory_id', 'id');
+    }
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class,'category_id', 'id');
     }
 
 

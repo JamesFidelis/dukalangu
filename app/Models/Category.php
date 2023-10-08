@@ -16,9 +16,14 @@ class Category extends Model
         'shop_id',
     ];
 
-    public function inventory(): BelongsTo
+    public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class,'category_id', 'id');
+    }
+
+    public function inventory(): HasMany
+    {
+        return $this->hasMany(Inventory::class,'category_id', 'id');
     }
 
     public function shop(): BelongsTo

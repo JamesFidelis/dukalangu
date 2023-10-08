@@ -28,11 +28,19 @@ class DatabaseSeeder extends Seeder
             'username' => 'JamesKanga',
             'email' => 'jameskanga'.'@gmail.com',
             'isAdmin' => 1,
+            'tin_number' => 1781551,
             'phone_number' => '255768104101',
             'password' => Hash::make('password'),
         ]);
-        User::factory()
-            ->count(5)
-            ->create();
+       DB::table('users')->insert([
+            'name' => 'Michael Momo',
+            'username' => 'MichaelMomo',
+            'email' => 'michael'.'@gmail.com',
+            'isAdmin' => 1,
+            'tin_number' => 6918651,
+            'phone_number' => '255761234567',
+            'password' => Hash::make('password'),
+        ]);
+
     }
 }

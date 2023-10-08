@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Models\InventoryImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
@@ -18,21 +19,26 @@ class InventoryController extends Controller
         $validateData = $request->validate([
             'barcode'=>'required|unique:inventories,barcode',
             'buy_price'=>'required',
+            'product_name'=>'required',
             'price_retail'=>'required',
             'price_bulk'=>'required',
             'quantity'=>'required',
             'shop_id'=>'required',
+            'category_id'=>'required',
         ]);
 
 
 
         $inventory = Inventory::create([
             'barcode'=>$request->barcode,
+            'product_name'=>$request->product_name,
             'buy_price'=>$request->buy_price,
             'price_retail'=>$request->price_retail,
             'price_bulk'=>$request->price_bulk,
             'quantity'=>$request->quantity,
             'shop_id'=>$request->shop_id,
+            'owner_id'=>Auth::user()->id,
+            'category_id'=>$request->category_id,
         ]);
 
 
@@ -80,7 +86,7 @@ class InventoryController extends Controller
     }
 
     public function getInventory(){
-        $inventory = Inventory::with(['images','sales','stock'])->get();
+        $inventory = Inventory::with(['images','sales'])->get();
 
         return response([
             'inventory'=>$inventory
