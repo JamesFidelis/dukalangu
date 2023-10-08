@@ -14,9 +14,12 @@ class Bill extends Model
     protected $fillable = [
         'bill_no',
         'customer_id',
+        'customer_names',
         'shop_id',
         'normal_price',
         'discount_price',
+        'quantity',
+        'total',
         'isPaid',
     ];
 

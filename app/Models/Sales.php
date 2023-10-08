@@ -11,6 +11,7 @@ class Sales extends Model
     use HasFactory;
     protected $fillable = [
         'bar_code',
+        'sale_no',
         'quantity',
         'item_price',
         'item_discount',
@@ -19,6 +20,7 @@ class Sales extends Model
         'shop_id',
         'customer_id',
         'bill_id',
+        'isPaid',
     ];
 
     public function inventory(): BelongsTo

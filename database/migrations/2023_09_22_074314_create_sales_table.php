@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->string('sale_no')->unique();
             $table->bigInteger('quantity');
             $table->double('item_price');
-            $table->double('item_discount');
+            $table->double('item_discount')->nullable();
             $table->double('total');
             $table->boolean('credit');
             $table->unsignedBigInteger('shop_id');
             $table->unsignedBigInteger('customer_id');
-            $table->string('bill_id');
-            $table->foreign('bill_id')->references('bill_no')->on('bills')->onDelete('cascade');
+//            $table->string('bill_id');
+//            $table->foreign('bill_id')->references('bill_no')->on('bills')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->boolean('isPaid')->default(false);
             $table->timestamps();
         });
     }

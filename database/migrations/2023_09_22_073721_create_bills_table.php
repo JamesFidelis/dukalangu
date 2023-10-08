@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('bill_no')->unique();
             $table->string('normal_price');
             $table->string('discount_price');
+            $table->bigInteger('quantity');
+            $table->string('customer_names')->nullable();
+            $table->double('total');
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->boolean('isPaid')->default(false);

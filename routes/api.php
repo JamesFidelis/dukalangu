@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CustomersController;
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\Api\SalesController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\StockController;
 use Illuminate\Http\Request;
@@ -45,6 +46,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/customers',[CustomersController::class,'addCustomer']);
     Route::get('/customers',[CustomersController::class,'getCustomers']);
     Route::delete('/customers',[CustomersController::class,'deleteCustomer']);
+    Route::get('/sales',[SalesController::class,'getSales']);
+    Route::post('/sales',[SalesController::class,'addSale']);
+    Route::delete('/sales',[SalesController::class,'deleteSale']);
 });
 
 
