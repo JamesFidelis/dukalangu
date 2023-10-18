@@ -1,9 +1,9 @@
+import {createApp, h} from 'vue';
+import {createInertiaApp} from "@inertiajs/vue3";
+import '../css/app.css';
 import 'flowbite';
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
-
-
-
+import 'flowbite-datepicker';
+import {ZiggyVue} from "ziggy-js/dist/vue.es";
 
 
 createInertiaApp({
@@ -14,6 +14,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(ZiggyVue)
             .mount(el)
     },
-})
+});

@@ -68,7 +68,7 @@ class ShopController extends Controller
             'name'=>$request->name,
             'username'=>$request->username,
             'email'=>$request->email,
-            'password'=>Hash::make('12345678'),
+            'password'=>Hash::make('password'),
             'phone_number'=>$request->phone_number,
             'isAdmin'=>0,
             'shop_id'=>$request->shop_id,

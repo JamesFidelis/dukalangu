@@ -86,11 +86,20 @@ class InventoryController extends Controller
     }
 
     public function getInventory(){
-        $inventory = Inventory::with(['images','sales'])->get();
+        if(Auth::user()->isAdmin==1){
+            $inventory = Inventory::with(['images','sales'])->get();
 
-        return response([
-            'inventory'=>$inventory
-        ], 200);
+            return response([
+                'inventory'=>$inventory
+            ], 200);
+        }else{
+            $inventory = Inventory::with(['images','sales'])->where('shop_id',Auth::user()->shop_id)->get();
+
+            return response([
+                'inventory'=>$inventory
+            ], 200);
+        }
+
     }
 
 
