@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 use App\Models\Sales;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class SalesController extends Controller
 
         $total = ($request->item_price-$request->item_discount) * $request->quantity;
 
+        $isPaid = $request->credit==1?0:1;
 
 
         $sale = Sales::create([
@@ -52,16 +54,30 @@ class SalesController extends Controller
             'credit'=>$request->credit,
             'shop_id'=>$request->shop_id,
             'customer_id'=>$request->customer_id,
-            'isPaid'=>$request->isPaid,
+            'isPaid'=>$isPaid,
         ]);
 
 
         if($sale){
-            return response([
-                'notification' => 'Success',
-                'message' => 'Item Sold Successfully',
-                'sale'=>$sale
-            ], 200);
+
+            $quant = Inventory::where('barcode',$request->barcode)->get()->first()->quantity - $request->quantity;
+
+            $inventory = Inventory::where('barcode',$request->barcode)->update([
+                'quantity'=>$quant
+            ]);
+            if($inventory){
+                return response([
+                    'notification' => 'Success',
+                    'message' => 'Item Sold Successfully',
+                    'sale'=>$sale
+                ], 200);
+            }else{
+             Sales::where('id',$sale->id)->delete();
+                return response([
+                    'notification' => 'failure',
+                    'message' => 'Could Not Sell Inventory'
+                ], 401);
+            }
         }else{
             return response([
                 'notification' => 'failure',
